@@ -1,55 +1,22 @@
-package co.btrujillo.poointerfaces.repositorio;
+package co.btrujillo.poointerfaces.repositorio.lista;
 
 import co.btrujillo.poointerfaces.modelo.Cliente;
+import co.btrujillo.poointerfaces.repositorio.AbstractaListRepositorio;
+import co.btrujillo.poointerfaces.repositorio.Direccion;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ClienteListReporitorio implements OrdenablePaginableCrudRepositorio{
-
-    private  List<Cliente> dataSource;
-
-    public ClienteListReporitorio() {
-        this.dataSource = new ArrayList<>();
-    }
+public  class ClienteListReporitorio extends AbstractaListRepositorio<Cliente> {
 
 
-    @Override
-    public List<Cliente> listar() {
-        return dataSource;
-    }
-
-    @Override
-    public Cliente porId(Integer id) {
-        Cliente resultado = null;
-
-        for(Cliente cliente: dataSource )
-            if(cliente.getId()!=null && cliente.getId().equals(id)){
-                resultado=cliente;
-                break;
-            }
-
-        return resultado;
-    }
-
-    @Override
-    public void crear(Cliente cliente) {
-        this.dataSource.add(cliente);
-    }
 
     @Override
     public void editar(Cliente cliente) {
         Cliente c = this.porId(cliente.getId());
         c.setNombre(cliente.getNombre());
         c.setApellido(cliente.getApellido());
-
-    }
-
-    @Override
-    public  void eliminar(Integer id) {
-
-        this.dataSource.remove(this.porId(id));
 
     }
 
@@ -70,11 +37,6 @@ public class ClienteListReporitorio implements OrdenablePaginableCrudRepositorio
         return listaOrdenada;
     }
 
-    @Override
-    public List<Cliente> listar(int desde, int hasta) {
-        return dataSource.subList(desde, hasta);
-    }
-
     public static int ordenar(Cliente a , Cliente b,String campo){
         int resultado = 0;
 
@@ -90,8 +52,5 @@ public class ClienteListReporitorio implements OrdenablePaginableCrudRepositorio
         return resultado;
     }
 
-    @Override
-    public int total() {
-        return this.dataSource.size();
-    }
+
 }

@@ -2,11 +2,12 @@ package co.btrujillo.poointerfaces;
 
 import co.btrujillo.poointerfaces.modelo.Cliente;
 import co.btrujillo.poointerfaces.repositorio.*;
+import co.btrujillo.poointerfaces.repositorio.lista.ClienteListReporitorio;
 
 public class EjemploRepositorio  {
     public static void main(String[] args) {
 
-        OrdenablePaginableCrudRepositorio repositorioClientes= new ClienteListReporitorio();
+        OrdenablePaginableCrudRepositorio <Cliente> repositorioClientes= new ClienteListReporitorio();
 
         repositorioClientes.crear(new Cliente("Bayron","Trujillo"));
         repositorioClientes.crear(new Cliente("Sebastian","Leon"));
